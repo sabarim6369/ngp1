@@ -2,12 +2,49 @@ import { motion } from 'framer-motion';
 import { RiDownloadLine, RiBarChartBoxLine, RiBookOpenLine, RiTimeLine, RiUserLine, RiCalendarLine } from 'react-icons/ri';
 
 function Dashboard() {
-  const resources = [
-    { name: "Study Guide 2024", size: "2.3 MB", type: "PDF", downloads: 128 },
-    { name: "Practice Questions", size: "1.1 MB", type: "DOC", downloads: 85 },
-    { name: "Course Materials", size: "5.6 MB", type: "ZIP", downloads: 234 }
-  ];
-
+    const resources = [
+        {
+          name: "Textbook of Zoology",
+          size: "50.2 MB",
+          type: "PDF",
+          downloads: 128,
+          pdfUrl: "https://archive.org/download/textbookofzoolog00pott/textbookofzoolog00pott.pdf",
+        },
+        {
+          name: "Introduction to Botany",
+          size: "3.7 MB",
+          type: "PDF",
+          downloads: 85,
+          pdfUrl: "https://herba.msu.ru/shipunov/school/biol_154/textbook/intro_botany.pdf",
+        },
+        {
+          name: "A Text-book of Botany",
+          size: "45.3 MB",
+          type: "PDF",
+          downloads: 234,
+          pdfUrl: "https://archive.org/download/textbookofbotany00stra/textbookofbotany00stra.pdf",
+        },
+      ];
+      const downloadFile = (url, filename) => {
+        fetch(url, { mode: "no-cors" }) // Ensures cross-origin safety
+          .then(response => response.blob())
+          .then(blob => {
+            const link = document.createElement("a");
+            const objectURL = window.URL.createObjectURL(blob);
+      
+            link.href = objectURL;
+            link.setAttribute("download", filename || "file.pdf"); // Ensures download behavior
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+      
+            // Revoke the object URL to free memory
+            setTimeout(() => URL.revokeObjectURL(objectURL), 100);
+          })
+          .catch(error => console.error("Download failed:", error));
+      };
+      
+      
   const upcomingQuizzes = [
     { subject: "Mathematics", date: "Tomorrow", time: "10:00 AM", difficulty: "Medium" },
     { subject: "Science", date: "Friday", time: "2:00 PM", difficulty: "Hard" }
@@ -44,7 +81,7 @@ function Dashboard() {
         animate={{ y: 0, opacity: 1 }}
         className="mb-8"
       >
-        <h1 className="text-3xl font-bold mb-2">Welcome back, John! 👋</h1>
+        <h1 className="text-3xl font-bold mb-2">Welcome back, Sabari! 👋</h1>
         <p className="text-gray-600">Here's what's happening with your studies today.</p>
       </motion.div>
 
@@ -122,7 +159,10 @@ function Dashboard() {
                     whileTap={{ scale: 0.95 }}
                     className="p-2 text-primary hover:bg-primary/10 rounded-full"
                   >
-                    <RiDownloadLine size={20} />
+<button onClick={() => downloadFile(resource.pdfUrl, resource.name + ".pdf")}>
+  <RiDownloadLine size={20} />
+</button>
+
                   </motion.button>
                 </motion.div>
               ))}
