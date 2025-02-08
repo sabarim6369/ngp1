@@ -15,7 +15,7 @@ const SuperAdminDashboard = () => {
     const getAllAdmins = async () => {
       try {
         const superadminId = "67a75f2904fb34bc331d6392"; // Replace with dynamic ID if needed
-        const response = await axios.get(`http://localhost:2000/api/superadmin/getadmins/${superadminId}`);
+        const response = await axios.get(`https://ngp1-2.onrender.com/api/superadmin/getadmins/${superadminId}`);
         console.log(response.data);
         if (response.status === 200) {
           setAdmins(response.data.admins);
@@ -53,7 +53,7 @@ const SuperAdminDashboard = () => {
   const handleAddAdmin = async () => {
     if (newAdmin.name && newAdmin.email && newAdmin.password && newAdmin.collegeName && newAdmin.phone) {
       try {
-        const response = await axios.post("http://localhost:2000/api/superadmin/addadmin", newAdmin);
+        const response = await axios.post("https://ngp1-2.onrender.com/api/superadmin/addadmin", newAdmin);
         setAdmins([...admins, { id: admins.length + 1, ...newAdmin }]);
         setNewAdmin({
           superadminId: "67a75f2904fb34bc331d6392",

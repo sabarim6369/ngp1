@@ -21,7 +21,7 @@ const Login = () => {
       console.log(`Logging in with email: ${email} and role: ${role}`);
   
       if (role === "student") {
-        const response = await axios.post("http://localhost:2000/api/player/login", {
+        const response = await axios.post("https://ngp1-2.onrender.com/api/player/login", {
           email,
           password,
           role,
@@ -43,7 +43,7 @@ const Login = () => {
           toast.error("Login failed: Invalid response status");
         }
       } else if (role === "admin") {
-        const response = await axios.post("http://localhost:2000/api/admin/login", {
+        const response = await axios.post("https://ngp1-2.onrender.com/api/admin/login", {
           email,
           password,
           role,
@@ -65,7 +65,7 @@ const Login = () => {
           toast.error("Login failed: Invalid response status");
         }
       } else if (role === "superadmin") {
-        const response = await axios.post("http://localhost:2000/api/superadmin/login", {
+        const response = await axios.post("https://ngp1-2.onrender.com/api/superadmin/login", {
           email,
           password,
           role,
@@ -88,7 +88,7 @@ const Login = () => {
           toast.error("Login failed: Invalid response status");
         }
       } else if (role === "teacher") {
-        const response = await axios.post("http://localhost:2000/api/teacher/login", {
+        const response = await axios.post("https://ngp1-2.onrender.com/api/teacher/login", {
           email,
           password,
           role,
