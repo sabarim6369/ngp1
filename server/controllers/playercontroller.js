@@ -41,7 +41,7 @@ const signup = async (req, res) => {
     const token = jwt.sign(
       { playerId: newPlayer._id, role: "student"},
       process.env.JWT_SECRET || "your_jwt_secret",
-      { expiresIn: "1h" }
+      { expiresIn: "1d" }
     );
 
     res.status(201).json({

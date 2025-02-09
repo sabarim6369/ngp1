@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Notes = ({ organismId }) => {
   const [notes, setNotes] = useState('');
   
-  // Load notes from localStorage when component mounts
+
   useEffect(() => {
     const savedNotes = localStorage.getItem(`organism-notes-${organismId}`);
     if (savedNotes) {
